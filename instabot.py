@@ -127,7 +127,7 @@ def get_like_list(insta_username):
         else:
             print "No like Yet"
     else:
-        print" error!status code other then 200 received"
+        print" Error!:status code other then 200 received"
 
 
 #Function declaration to get the ID of the recent post of a user by username starts
@@ -144,10 +144,10 @@ def get_post_id(insta_username):
         if len(user_media['data']):
             return user_media['data'][0]['id']
         else:
-            print 'There is no recent post of the user!'
+            print 'Error!:There is no recent post of the user!'
             exit()
     else:
-        print 'Status code other than 200 received!'
+        print 'Error!:Status code other than 200 received!'
         exit()
 #Function declaration to get the ID of the recent post of a user by username ends
 
@@ -164,7 +164,7 @@ def like_a_post(insta_username):
     if post_a_like['meta']['code'] == 200:                                                        #check for status code of the request
         print 'Wow (^_^) Like was successful!'
     else:
-        print 'Your like was unsuccessful. Try again!'
+        print 'Error!:Your like was unsuccessful. Try again!'
 # Function declaration to like the recent post of a user ends
 
 
@@ -182,7 +182,7 @@ def get_comment_list(insta_username):
         else:
             print "No comment Yet"
     else:
-        print" error!status code other then 200 received"
+        print"Error!:status code other then 200 received"
 # Function declaration to get the list of comments on a post it accepts the user's username ends
 
 
@@ -200,7 +200,7 @@ def post_a_comment(insta_username):
     if make_comment['meta']['code'] == 200:                                                         #check for status code of the request
         print "Wow (^_^) Successfully added a new comment!"
     else:
-        print "Unable to add comment. Try again!"
+        print "Error!:Unable to add comment. Try again!"
 # Function declaration to make a comment on the recent post of the user ends
 
 
@@ -230,7 +230,7 @@ def delete_negative_comment(insta_username):
                     if delete_info['meta']['code'] == 200:                                      #check for status code of the request
                         print 'Wow (^_^) Comment successfully deleted!\n'                       #printing of meaningfull msg on the successfull deletion of negative comment
                     else:
-                        print 'Unable to delete comment!'                                       #error in deleting comment
+                        print 'Error!:Unable to delete comment!'                                       #error in deleting comment
                 else:
                     print 'Positive comment : %s\n' % (comment_text)                            #printing of meaningfull msg or  positive comment
         else:
@@ -275,6 +275,13 @@ def iterate_through_negative_comments(media_id):
                 blob = TextBlob(comment_text, analyzer=NaiveBayesAnalyzer())
                 if (blob.sentiment.p_neg > blob.sentiment.p_pos):
                     print 'Negative comment is : %s' % (comment_text)
+                #else:
+                    #print "No negative comment Yet"
+        else:
+            print "No existing negative comment yet on post"
+    else:
+        print "Status code other than 200 received!"
+    return None
 # function declaration to iterate through the negative comments on a post which gets users post ends.
 
 
@@ -309,8 +316,9 @@ def min_likes_on_post(insta_username):
     else:
         print 'Status code other than 200 received!'
         exit()
-
 # function declaration to find minimum number of likes on a post ends
+
+
 
 #def start_bot() function starts
 def start_bot():
@@ -341,7 +349,7 @@ def start_bot():
                     print "10.Delete negative comments from the recent post of a user"
                     print "11.To iterate through the negative comments on a post"
                     print "12.Post having minimum number of likes"
-                    print "13.exit\n"
+                    print "13.Exit\n"
                 elif (choose == 'b'):
                     print "Choose for which user task to be performed:\n"
                     print("My sandbox users are:")
